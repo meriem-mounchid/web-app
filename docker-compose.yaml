@@ -18,43 +18,43 @@ services:
     networks:
         - mynetwork
 
-  wordpress:                         
-    build:
-      context: ./wordpress/
-      args: 
-        - WORDPRESS_DB_HOST=$WORDPRESS_DB_HOST
-        - WORDPRESS_DB_USER=$WORDPRESS_DB_USER
-        - WORDPRESS_DB_PASSWORD=$WORDPRESS_DB_PASSWORD
-        - WORDPRESS_DB_NAME=$WORDPRESS_DB_NAME
-        - WORDPRESS_ROOT_USER=$WORDPRESS_ROOT_USER
-        - WORDPRESS_ROOT_PASSWORD=$WORDPRESS_ROOT_PASSWORD
-        - WORDPRESS_USER=$WORDPRESS_USER
-        - WORDPRESS_PASSWORD=$WORDPRESS_PASSWORD
-    image: wordpress
-    container_name: wordpress
-    volumes:
-      - wordpress_nginx:/var/www/html/wordpress
-    depends_on:
-      - mariadb
-    env_file: .env
-    networks:
-      - mynetwork
-    restart: always
+  # wordpress:                         
+  #   build:
+  #     context: ./wordpress/
+  #     args: 
+  #       - WORDPRESS_DB_HOST=$WORDPRESS_DB_HOST
+  #       - WORDPRESS_DB_USER=$WORDPRESS_DB_USER
+  #       - WORDPRESS_DB_PASSWORD=$WORDPRESS_DB_PASSWORD
+  #       - WORDPRESS_DB_NAME=$WORDPRESS_DB_NAME
+  #       - WORDPRESS_ROOT_USER=$WORDPRESS_ROOT_USER
+  #       - WORDPRESS_ROOT_PASSWORD=$WORDPRESS_ROOT_PASSWORD
+  #       - WORDPRESS_USER=$WORDPRESS_USER
+  #       - WORDPRESS_PASSWORD=$WORDPRESS_PASSWORD
+  #   image: wordpress
+  #   container_name: wordpress
+  #   volumes:
+  #     - wordpress_nginx:/var/www/html/wordpress
+  #   depends_on:
+  #     - mariadb
+  #   env_file: .env
+  #   networks:
+  #     - mynetwork
+  #   restart: always
  
-  nginx:
-    build: ./nginx/
-    image: nginx
-    container_name: nginx
-    volumes:
-      - wordpress_nginx:/var/www/html/wordpress
-    ports:
-      - 443:443
-      - 80:80
-    depends_on:
-      - wordpress
-    restart: always
-    networks:
-      - mynetwork
+  # nginx:
+  #   build: ./nginx/
+  #   image: nginx
+  #   container_name: nginx
+  #   volumes:
+  #     - wordpress_nginx:/var/www/html/wordpress
+  #   ports:
+  #     - 443:443
+  #     - 80:80
+  #   depends_on:
+  #     - wordpress
+  #   restart: always
+  #   networks:
+  #     - mynetwork
   
   website:
     build: ./bonus/website/
@@ -133,7 +133,7 @@ services:
 
 volumes:
   website_data:
-  wordpress_nginx:
+  # wordpress_nginx:    
     # driver: local
     # driver_opts:
     #   type: none
