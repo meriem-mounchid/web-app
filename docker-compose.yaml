@@ -52,6 +52,7 @@ services:
       - 80:80
     depends_on:
       - wordpress
+      - mariadb
     restart: always
     networks:
       - mynetwork
@@ -68,18 +69,18 @@ services:
     networks:
       - mynetwork
 
-  adminer:
-    build: ./bonus/adminer/
-    image: adminer
-    container_name: adminer
-    env_file: .env
-    restart: always
-    depends_on:
-      - mariadb
-    ports:
-      - 8080:8080
-    networks:
-      - mynetwork
+  # adminer:
+  #   build: ./bonus/adminer/
+  #   image: adminer
+  #   container_name: adminer
+  #   env_file: .env
+  #   restart: always
+  #   depends_on:
+  #     - mariadb
+  #   ports:
+  #     - 8080:8080
+  #   networks:
+  #     - mynetwork
 
 #   ftp:
 #     build:
