@@ -1,22 +1,22 @@
 version: '3'
 
 services:
-  # mariadb:
-  #   build:
-  #     context: ./mariadb/
-  #     args: 
-  #       - MYSQL_USER=$MYSQL_USER
-  #       - MYSQL_PASSWORD=$MYSQL_PASSWORD
-  #       - MYSQL_DATABASE=$MYSQL_DATABASE
-  #       - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-  #   image: mariadb
-  #   container_name: mariadb
-  #   volumes:
-  #     - mariadb_data:/var/lib/mysql
-  #   env_file: .env
-  #   restart: always
-  #   networks:
-  #       - mynetwork
+  mariadb:
+    build:
+      context: ./mariadb/
+      args: 
+        - MYSQL_USER=$MYSQL_USER
+        - MYSQL_PASSWORD=$MYSQL_PASSWORD
+        - MYSQL_DATABASE=$MYSQL_DATABASE
+        - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    image: mariadb
+    container_name: mariadb
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    env_file: .env
+    restart: always
+    networks:
+        - mynetwork
 
   wordpress:                         
     build:
@@ -34,8 +34,8 @@ services:
     container_name: wordpress
     volumes:
       - wordpress_nginx:/var/www/html/wordpress
-    # depends_on:
-    #   - mariadb
+    depends_on:
+      - mariadb
     env_file: .env
     networks:
       - mynetwork
@@ -52,7 +52,7 @@ services:
       - 80:80
     depends_on:
       - wordpress
-      # - mariadb
+      - mariadb
     restart: always
     networks:
       - mynetwork
@@ -140,7 +140,7 @@ volumes:
     #   type: none
     #   o: bind
     #   device: /Users/mmounchi/goinfre/wordpress_nginx
-  # mariadb_data:
+  mariadb_data:
     # driver: local
     # driver_opts:
     #   type: none
